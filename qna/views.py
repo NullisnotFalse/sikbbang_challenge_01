@@ -53,29 +53,20 @@ def qna_create_view(request):
 def qna_detail_view(request, pk):
     post = get_object_or_404(QnaModel, pk=pk)
     if request.method == "GET":
-        context = {
-            'post' : post, 
-        }
-    return render(request, 'qna/qna_detail.html', context)
-
-@login_required
-def qna_edit_view(request, pk):
-    post = get_object_or_404(QnaModel, pk=pk)
-    if request.method == "GET":
-        context = {
-            'post' : post,
-        }
-        return render(request, 'qna/qna_update.html', context)
+      context = {
+          'post' : post, 
+      }
+      return render(request, 'qna/qna_detail.html', context)
     if request.method == "POST":
-        post.title = request.POST['inputValue']
-        post.content = request.POST['inputcontent']
-        post.save()
-        return redirect('/qna_list')
-        # return redirect('/qna/edit/'+ str(post.pk) +'/')
+      post.title = request.POST['inputValue']
+      post.content = request.POST['inputcontent']
+      post.save()
+      return redirect('/qna/detail/'+ str(post.pk) +'/')
     
     
 #========문의글 삭제 view===========
 def qna_delete_view(request, pk):
+  if request.method == "POST":
     post = get_object_or_404(QnaModel, pk=pk)
     post.delete()
     return redirect('/qna_list')

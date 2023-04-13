@@ -4,49 +4,59 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>{% block title %}{% endblock %} | 챌린지</title>
+  <title>{% block title %}{% endblock %} | 식빵...챌..릱..</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  {% block static %}
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <link rel="stylesheet" href="{% static 'base.css' %}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script defer src="{% static 'base.js' %}"></script>
-  {% endblock %}
+  <title>Document</title>
+
 </head>
 
-
-
 <body>
-  <!-- 상단바입니다 -->
   <div class="nav">
-    <a href="/" class="logo">sikbbang_challenge</a>
-    <div class="menu_box">
-      {% if not user.is_authenticated %}
-      <div class="sign_box">
-        <a href="/signin" class="sign_in">로그인</a>
-        <span>|</span>
-        <a href="/signup" class="sign_up">회원가입</a>
-      </div>
-      {% else %}
-      <div class="sign_box">
-        <i class="xi-bars"></i>
-      </div>
-      {% endif %}
+    <a href="/" class="logo">로고를 넣어주세요.</a>
+    <div class="sign_box">
+      <a href="/sign-in" class="sign_in">로그인</a>
+      <a href="/sign-up" class="sign_up">회원가입</a>
     </div>
   </div>
-
-
-  <!-- 사이드 바 입니다 -->
-  <div class="slide_nav">
-    <a href="#">HOME</a>
-    <a href="/qna_list/">문의게시판</a>
-    <a href="#">마이페이지</a>
-    <a href="/logout">로그아웃</a>
-  </div>
-
   {% block content %}
   {% endblock %}
-</body>
+  <h1>문의게시판</h1>
 
+  <nav>
+    <ul>
+      <li>Home</li>
+      <li><a href="/qna/create">작성하기</a></li>
+      <li>마이페이지</li>
+    </ul>
+  </nav>
+
+  <table>
+    <thead>
+      <tr>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if allqna %}
+      {% for qna in allqna %}
+      <tr>
+        <td><a href="{% url 'qna-detail' pk=qna.pk %}">{{ qna.title }}</a></td>
+        <td>{{ qna.author }}</td>
+        <td>{{ qna.created_at|date:'Y. m. d' }}</td>
+      </tr>
+      {% endfor %}
+      {% else %}
+      <tr>
+        <td>작성된 게시글이 없습니다.</td>
+      </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</body>
 </html>

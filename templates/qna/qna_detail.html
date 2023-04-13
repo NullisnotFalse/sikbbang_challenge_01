@@ -1,20 +1,20 @@
-{% extends 'base.html' %}
-
-
 {% block content %}
+<form method="post">
+  {% csrf_token %}
+  <p>작성자: {{ post.author }}</p>
+  <p>작성일: {{ post.created_at|date:'Y. m. d' }}</p>
+  <label for="name">제목:{{ post.title }}</label>
+  <input type="text" class="qna_edit" value="{{ post.title }}" name="inputValue"><br><br>
+  <label for="code">문의 내용:{{ post.content }}</label>
+  <input type="text" class="qna_edit" value="{{ post.content }}" name="inputcontent"><br>
+
+  <button type="submit">수정</button>
+</form>
 
 
-<div class="qna_detail_box_cover">
-  <form method="post">
-    {% csrf_token %}
-    <div class="qna_detail_box">
-      <p>작성자: {{ post.author }}</p>
-      <p>작성일: {{ post.created_at|date:'Y. m. d' }}</p>
-      <p>제목:{{ post.title }}</p>
-      <p>문의 내용:{{ post.content }}</p><br><br>
+<form method="post" action="{% url 'qna-delete' pk=post.pk %}">
+  {% csrf_token %}
+  <button type="submit">삭제</button>
+</form>
 
-      <a class="go_to_edit_btn" type="button" href="{% url 'qna-edit' pk=post.pk %}">수정</a>
-  </form>
-</div>
-</div>
-{% endblock %}
+{% endblock content %}

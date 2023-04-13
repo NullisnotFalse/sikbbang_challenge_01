@@ -1,22 +1,11 @@
-{% extends 'base.html' %}
+<form method="post">
+  {% csrf_token %}
+  <label for="name">제목:</label>
+  <input type="text" required id="name" name="title"><br>
 
+  <label for="code">문의 내용:</label>
+  <input type="text" required id="code" name="content"><br>
 
+  <button type="submit" class="btn btn-primary">등록</button>
 
-
-{% block content %}
-<div class="qna_create_box_cover">
-  <form method="post">
-    {% csrf_token %}
-    <div class="qna_create_box">
-      <label for="name">제목:</label>
-      <input class="qna_title_box" type="text" required id="name" name="title"><br><br>
-
-      <label for="code">문의 내용:</label><br>
-      <textarea class="qna_content_box" required id="code" name="content"></textarea><br><br>
-
-      <button type="submit" class="qna_btn">등록</button>
-    </div>
-  </form>
-</div>
-
-{% endblock %}
+</form>

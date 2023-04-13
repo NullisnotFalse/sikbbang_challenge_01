@@ -10,7 +10,6 @@
 
 <!-- base.html에서 'content'블록을 상속받아 사용하는 코드 -->
 {% block content %}
-
 <div class="container">
   <div class="wrap">
     <h2 class="title-center"> 회원가입 </h2>
@@ -33,6 +32,7 @@
       <div style="float: right">
         <!--form태그의 method로 action에 데이터를 보내주는 역할-->
         <button type="submit" class="btn btn-primary">회원가입</button>
+        <a href="/signin" class="btn btn-secondary">로그인 페이지로</a>
       </div>
     </form>
 

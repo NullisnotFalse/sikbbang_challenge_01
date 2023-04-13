@@ -1,43 +1,35 @@
 {% extends 'base.html' %}
-
-{% block content %}
-
+<h1>문의게시판</h1>
 
 <nav>
-  <ul class="qna_create">
+  <ul>
+    <li>Home</li>
     <li><a href="/qna/create">작성하기</a></li>
+    <li>마이페이지</li>
   </ul>
 </nav>
-<br>
 
-
-
-
-<div class="main_middle">
-  <ul class="cont_txt">
-    <li class="row1">
-      <p>제목</p>
-    </li>
-    <li class="row3">
-      <p>작성자</p>
-    </li>
-    <li class="row5">
-      <p>작성일</p>
-    </li>
-  </ul>
-  {% if allqna %}
-  {% for qna in allqna %}
-  <section class="cont_box">
-    <ul class="cont_ul">
-      <li class="row2"><a href="{% url 'qna-detail' pk=qna.pk %}">{{ qna.title }}</a></li>
-      <li class="row4">{{ qna.author }}</li>
-      <li class="row6">{{ qna.created_at|date:'Y. m. d' }}</li>
-    </ul>
-    <hr>
+<table>
+  <thead>
+    <tr>
+      <th>제목</th>
+      <th>작성자</th>
+      <th>작성일</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if allqna %}
+    {% for qna in allqna %}
+    <tr>
+      <td><a href="{% url 'qna-detail' pk=qna.pk %}">{{ qna.title }}</a></td>
+      <td>{{ qna.author }}</td>
+      <td>{{ qna.created_at|date:'Y. m. d' }}</td>
+    </tr>
     {% endfor %}
     {% else %}
-    <span>작성된 게시글이 없습니다.</span>
+    <tr>
+      <td>작성된 게시글이 없습니다.</td>
+    </tr>
     {% endif %}
-  </section>
-</div>
-{% endblock %}
+  </tbody>
+</table>
